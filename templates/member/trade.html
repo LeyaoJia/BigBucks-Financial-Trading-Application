@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<h3>Enter your Trading details:</h3>
+  <form method="post">
+    <label for="symbol">Stock Symbol (e.g. AAPL, IBM, TSLA)</label>
+    <input name="symbol" id="symbol" value="{{ request.form['symbol'] }}" required>
+    <!-- <label for="date">Action date (YYYY-MM-DD)</label>
+    <input type=date name="date" id="date" value="{{ request.form['date'] }}" required> -->
+    <label for="act">Action (buy / sell)</label>
+    <input name="act" id="act" value="{{ request.form['act'] }}" required>
+    <label for="shares">Number of Shares</label>
+    <input name="shares" id="shares" value="{{ request.form['shares'] }}" required>
+    
+    <!-- <label for="cash">Initial Cash for tesing</label>
+    <input name="cash" id="cash" value="{{ request.form['cash'] }}" > -->
+    <input id="trade" type="submit" value="Submit Order">
+  </form>
+
+<br>
+  <h3>Your Trading History:</h3>
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Stock Symbol</th>
+        <th>Name</th>
+        <th>Action</th>
+        <th>Action Price</th>
+        <th>Number of Shares</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for trade in trades %}
+        <tr>
+          <td>{{ trade['added'] }}</td>
+          <td>{{ trade['symbol'] }}</td>
+          <td>{{ trade['name'] }}</td>
+          <td>{{ trade['act'] }}</td>
+          <td>{{ "%.2f" | format(trade['actprice']) }}</td>
+          <td>{{ trade['share'] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  <br><br>
+  <a class="btn btn-primary" style="background-color: #274c77;" href="{{ url_for('member.index') }}">Return Home</a>
+
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+{% endblock %}

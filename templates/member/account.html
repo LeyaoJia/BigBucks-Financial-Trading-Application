@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h3>{% block title %}My Account{% endblock %}</h3>
+{% endblock %}
+
+{% block content %}
+
+    <p>Welcome to BigBucks!</p>
+
+    <div class="card mb-3" style="max-width: 500px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIPEQ0PDxAQDg4ODQ0ODRANCg8NChANFRIWFhURExUYHCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAaAAEAAgMBAAAAAAAAAAAAAAAAAQQCAwUH/8QAKhABAQABAgUDBAIDAQAAAAAAAAECAxEEITFBURJhcTKBobGR0UJywSL/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A9dAAAAAAAAAAAAAAAAAAAAAAAAAATEJgLgAKQAAAAAAAAAAAAAAAAAAAAAAAAACYhMBcABSAAAAAAAAAAN2elpXLpynlc09CY9t75vUFPHSyvSfe9Gc4XL2/leAUbwuXmfzWOWjlO2/w6ADl7jpZacvWS/Ma7wuN7bfF2BRFu8HPNV9bTmNklt70GAAAAAACYhMBcBIKIAAAAAAADboaPqvP6Z+WvHHeyTu6OGO0knYEybckgAAAAAADXranplu26hbvvb1rpWOfrafpu3brAYAAAAAAJiEwFwAFIAAAAAAAFngsOuX2i208LjtjP5bgAAAAAAAAFfjMN8d++PP7d1hjnN5Z5mwOaEAAAAAExCYC4ACkAAAAAAUKDo6P04/6z9M2Gl9OP+s/TMAAAAAAAAAAHL/sP7oAAAAAmITAXAAUgAAAAAG7S4e5Te3aflpro6P04/6z9Aywx2kniSJAAAAAAAAAAAFPU4Wzey799qruo5d635AAAAATEJgLgAKQAAAAAC3wefL095+lROOW1lnb9A6Qxwz3ksZAAAAAAAAAAWg18RqemXz0nyoRs1tT1XftOjWAAAAAmITAXAAUgAAAAAAAZ6Or6L7XrF+Xfn5c1a4PU5envOnwCyAAAAAAAApcTrer/wAzp391jiNT0z3vKKMAAAAAAATEJgLgAKQAAAAAAACcctrLOsQA6OnnMpLGTn6Opcb7Wzef9dAAAAAAt2FPitW23HtOvuDXq6nqu/adGAAAAAAAAJiEwFwAFIAAAAAAAAADx8z9unFDQw9WU8TnV8AAAABz9f6svl0FPi9Pa+rteV+QaAAAAAAAAExCYC4ACkAAAAAAFrPDSyy6T73oDBs0tG5e2PnysafCyc7zv4bwY4YTGbRkAAAAACLN0gKWtw9nPHnPHeNMrptWrw8y59L5gKI2Z6GWPvPZr3AAAAATEJgLgAKQAAM9LSuXTlO9Bg3afDW9eU/KzpaMx6dfPdsBr09HHHpOfm9WwAAAAAAAAAAAAAGGenMus/tmAqanC3/G/aq9m3Kza+7psc8JlysBzht1dC485zn5jUAmITAXAAUgbeH0fVzvSfmgnQ0PVzvKftdk2QAkQAkQAkQAkQAkQAkQAkQAkQAkQAkQAlV4jh++P3iyA5sqYscTo/5T7zyrwFwAFJe4f6cfhIDMAAAAAAAAAAAAAAAAAAAAAAAC9/hzcf8AoAugA//Z" class="img-fluid rounded-start" alt="No network!">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ g.user["username"] }}</h5>
+              <p class="card-text">Your Unique ID: {{ g.user["id"] }}</p>
+              <p class="card-text">Your Cash: $ {{ "%.2f" | format(g.user["cash"]) }}</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form action="{{ url_for('member.delete') }}" method="post">
+        <input class="danger" type="submit" value="Delete Account" onclick="return confirm('Are you sure?');">
+      </form>
+    <a class="btn btn-primary" style="background-color: #274c77;" href="{{ url_for('member.index') }}">Return Home</a>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    {% if g.user['Administrator'] == 1 %} 
+    <h4>&nbsp;&nbsp;&nbsp;&nbsp;Welcome back, admin {{ g.user["username"] }} !</h4>
+        <div style="text-align: center;">
+          <div class="card" style="width: 25rem; display: inline-block; margin-right: 20px;">
+              <div class="card-body">
+                <h4>Today's Trading</h4>
+                <p class="card-text">Click to see all trading records happened today!</p>
+                <a href="{{ url_for('administrator.today') }}" class="btn btn-primary" style="background-color: #274c77;">Today</a>
+              </div>
+            </div>
+            
+            <div class="card" style="width: 25rem; display: inline-block; margin-right: 20px;">
+              <div class="card-body">
+                <h4>Holdings Overview</h4>
+                <p class="card-text">Click here to see overall holdings!</p>
+                <a href="{{ url_for('administrator.overview') }}" class="btn btn-primary" style="background-color: #274c77;">Overview</a>
+              </div>
+            </div>
+      
+            <div class="card" style="width: 25rem; display: inline-block;">
+              <div class="card-body">
+                <h4>My Account</h4>
+                <p class="card-text">Click here to see your account info!</p>
+                <a href="{{ url_for('administrator.account') }}" class="btn btn-primary" style="background-color: #274c77;">My Account</a>
+              </div>
+            </div>
+          </div>
+
+    {% endif %}
+
+    {% if g.user['Administrator'] == 0 %}
+    <h4>&nbsp;&nbsp;Welcome to BigBucks, {{ g.user["username"] }} !</h4>
+    <div style="text-align: center;">
+    <div class="card" style="width: 25rem; display: inline-block; margin-right: 20px;">
+        <div class="card-body">
+          <h4>Trade Stocks</h4>
+          <p class="card-text">Click here to go trading!</p>
+          <a href="{{ url_for('member.trade') }}" class="btn btn-primary" style="background-color: #274c77;">Trade</a>
+        </div>
+      </div>
+      
+      <div class="card" style="width: 25rem; display: inline-block; margin-right: 20px;">
+        <div class="card-body">
+          <h4>My Holdings</h4>
+          <p class="card-text">Click here to see your holdings!</p>
+          <a href="{{ url_for('member.holding') }}" class="btn btn-primary" style="background-color: #274c77;">My Holdings</a>
+        </div>
+      </div>
+
+      <div class="card" style="width: 25rem; display: inline-block;">
+        <div class="card-body">
+          <h4>My Account</h4>
+          <p class="card-text">Click here to see your account info!</p>
+          <a href="{{ url_for('member.account') }}" class="btn btn-primary" style="background-color: #274c77;">My Account</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <br><br>
+    <h4>&nbsp;&nbsp;Market News for Today:</h4>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+      {% for i in range(5) %}
+      <h5 id="scrollspyHeading" target="_blank"><a href = "{{news['feed'][i]['url']}}" style = 'text-decoration: none;' target="_blank" >{{i+1}}) {{news['feed'][i]['title']}}</a></h5>
+      <p style="font-size:small;">{{news['feed'][i]['summary']}}</p>
+      {% endfor %}
+    </div>
+    
+{% endblock %}

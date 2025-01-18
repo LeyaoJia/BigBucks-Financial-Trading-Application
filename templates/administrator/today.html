@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h3>{% block title %}Today's trading{% endblock %}</h3>
+{% endblock %}
+
+{% block content %}
+
+<h3>Today's trading</h3>
+
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Stock Symbol</th>
+        <th>Name</th>
+        <th>Shares Bought</th>
+        <th>Shares Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for symbol in symbols %}
+        <tr>
+          <td>{{ trades_of_today[0]['added'] }}</td>
+          <td>{{ symbol['symbol'] }}</td>
+          <td>{{ symbol['name'] }}</td>
+          <td>{{ shares_b[symbol['symbol']] }}</td>
+          <td>{{ shares_s[symbol['symbol']] }}</td>
+          
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <br>
+  <a class="btn btn-primary" style="background-color: #274c77;" href="{{ url_for('member.index') }}">Return Home</a>
+  
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h3>{% block title %}Efficient Frontier{% endblock %}</h3>
+{% endblock %}
+
+{% block content %}
+
+<h3>Efficient Frontier Analysis</h3>
+    {% if stock_num < 2 %}
+        <p>Buy more stocks to see your EF!</p>
+    {% else %}
+        <p>(*It may take some time to generate. EF should be the curve made up of the outermost blue dots.)</p>
+        <div id="myDivh" style="width: 800px; height: 400px;"></div>
+    {% endif %}
+
+  <br>
+<h3>Quick Statistics of Your Current Portfolio:</h3>
+  <div>
+    <p>Annualized Expected Return : {{ "%.2f" | format(pf[1]*100) }}%</p>
+    <p>Annualized Volitility : {{ "%.2f" | format(pf[2]*100) }}%</p>
+    <p>Sharpe Ratio : {{ "%.2f" | format(pf[0]) }}</p>
+  </div>
+
+<br>
+
+    <a class="btn btn-primary" style="background-color: #274c77;" href="{{ url_for('member.holding') }}">Return to Previous Page</a>
+  
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-2.15.0.min.js"></script>
+    <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="{{ url_for('static', filename='ef.js') }}"></script>
+
+
+{% endblock %}

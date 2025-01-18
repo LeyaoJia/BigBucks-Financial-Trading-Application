@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <p>*Reminder: Enter admin code "512512" and you'll create an admin account, or you can ignore that blank to create a member account.</p>
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <label for="admin">Enter Administrator Code if available</label>
+    <input type="password" name="admin" id="admin">
+    <input type="submit" value="Register">
+  </form>
+{% endblock %}
